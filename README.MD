@@ -14,3 +14,18 @@ Galiausiai, kompiliavau ir testavau koda (naudojau g++, taip pat naujense versij
 g++ -std=c++11 merkle.cpp -o merkle $(pkg-config --cflags --libs libbitcoin-system)  
 
 (veliau sukelti nuotraukas)
+
+2 dalis:
+Bitcoin core'a idiegiau docker konteinerio pagrindu. Kiti gali pasiekti per 8333 port'a. Konteinerio paleidimas:
+docker run -d \
+  --name bitcoin-core \
+  -p 8332:8332 \
+  -p 8333:8333 \
+  -v bitcoin-data:/bitcoin/.bitcoin \
+  ruimarinho/bitcoin-core:latest \
+  -server=1 \
+  -prune=550 \
+  -rpcallowip=0.0.0.0/0 \
+  -rpcuser=student \
+  -rpcpassword=student123 \
+  -txindex=0
